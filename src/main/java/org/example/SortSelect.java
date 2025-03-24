@@ -28,10 +28,10 @@ public class SortSelect {
 
     public static void main(String[] args) {
         int[] temp = {1,3,2,9,8,7,4,3,5};
-        int [] res = SortSelect.sort(temp);
+        SortSelect.sort(temp);
 
-        for (int i = 0; i < res.length; i++) {
-            System.out.println(res[i]);
+        for (int i = 0; i < temp.length; i++) {
+            System.out.println(temp[i]);
         }
 
     }
