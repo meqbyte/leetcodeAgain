@@ -8,6 +8,8 @@ public class SortSelect {
         // boundary check
 
         for (int i = 0; i < arr.length; i++) {
+            // 先是 min
+            // 再优化为 min_index
             int min_index = i;
             for (int j = i+1; j < arr.length; j++) {
                 if (arr[j] < arr[min_index]) {
