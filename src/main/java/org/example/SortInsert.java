@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class SortInsert {
 
     // 问题代码，好好分析下
+    // 下标有问题 ，j
     public static int[] sort(int[] arr) {
 
         int[] b = new int[arr.length];
