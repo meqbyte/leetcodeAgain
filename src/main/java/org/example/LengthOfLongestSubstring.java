@@ -18,8 +18,8 @@ public class LengthOfLongestSubstring {
         // value , character index
         // if duplicate character, it's last position
 
-        int maxLen = 0;
-        int currLen =0 ;
+        int maxLen = -1;
+        int left = 0;
         for (int i = 0; i < s.length(); i++) {
 
             // if s[i] exists in hashmap
@@ -30,13 +30,12 @@ public class LengthOfLongestSubstring {
 
             if (hashMap.containsKey(s.charAt(i))) {
                 hashMap.put(s.charAt(i), i);
-                currLen = 1;
+                left ++;
             } else {
                 hashMap.put(s.charAt(i), i);
-                currLen ++;
             }
 
-            // 抽象出，一个计算类型的变量 currLen
+            int currLen = i - left +1;
             if (maxLen < currLen) {
                 maxLen = currLen;
             }
