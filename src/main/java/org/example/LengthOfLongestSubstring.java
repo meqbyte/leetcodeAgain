@@ -29,8 +29,11 @@ public class LengthOfLongestSubstring {
                 // put s[i] into hashmap
 
             if (hashMap.containsKey(s.charAt(i))) {
+                int last = hashMap.get(s.charAt(i)) ;
+                if (left <= last) {
+                    left = last + 1;
+                }
                 hashMap.put(s.charAt(i), i);
-                left ++;
             } else {
                 hashMap.put(s.charAt(i), i);
             }
