@@ -5,13 +5,13 @@ import java.util.Stack;
 
 public class IsValid {
 
-    private Stack<Character> stack = new Stack<>();
-
     public boolean isValid(String s) {
 
+        Stack<Character> stack = new Stack<>();
+
         for (int i = 0; i < s.length(); i++) {
-            Character c = s.charAt(i);
-            if (c.equals('(') || c.equals('[') || c.equals('{')) {
+            char c = s.charAt(i);
+            if (c == '(' || c == '[' || c == '{') {
                 stack.push(c);
             } else {
 
@@ -19,13 +19,11 @@ public class IsValid {
                     return false;
                 }
 
-                Character top = stack.peek();
+                char top = stack.peek();
 
-                if (c.equals(')') && top.equals('(')) {
-                    stack.pop();
-                } else if (c.equals(']') && top.equals('[')) {
-                    stack.pop();
-                } else if (c.equals('}') && top.equals('{')) {
+                if ((c == ')' && top == '(') ||
+                        (c == ']' && top == '[') ||
+                        (c == '}' && top == '{'))  {
                     stack.pop();
                 } else {
                     return false;
@@ -33,11 +31,7 @@ public class IsValid {
             }
         }
 
-        if (!stack.isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
+        return stack.isEmpty();
 
     }
 }
