@@ -5,30 +5,23 @@ import java.util.Arrays;
 public class Merge {
     public static void merge(int[] nums1, int m, int[] nums2, int n) {
 
-        int p = 0;
-        int indexNum1 = 0;
-        int indexNum2 = 0;
-        while (indexNum1 < m && indexNum2 < n) {
-            if (nums1[indexNum1] <= nums2[indexNum2]) {
-                int t = nums1[p];
-                nums1[p] = nums1[indexNum1];
-                nums1[indexNum1] = t;
+        int p = m + n - 1;
+         m = m - 1;
+         n = n - 1;
+        while (m >= 0 && n >= 0) {
+            if (nums1[m] >= nums2[n]) {
+                nums1[p--] = nums1[m--];
             } else {
-                int t = nums1[p];
-                nums1[p] = nums2[indexNum2];
-                nums2[indexNum2] = t;
+                nums1[p--] = nums2[n--];
             }
-            indexNum1++;
-            indexNum2++;
-            p++;
         }
 
-        while (indexNum1 < m) {
-            nums1[p++] = nums1[indexNum1++];
+        while (m >= 0) {
+            nums1[p--] = nums1[m--];
         }
 
-        while (indexNum2 < n) {
-            nums1[p++] = nums2[indexNum2++];
+        while (n >= 0) {
+            nums1[p--] = nums2[n--];
         }
 
     }
