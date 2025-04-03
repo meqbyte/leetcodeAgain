@@ -36,51 +36,58 @@ public class LRUCache {
             return -1;
         }
 
-        Node curr = hashMap.get(key);
+        Node node = hashMap.get(key);
+        node.pre.next = node.next;
+        node.next.pre = node.pre;
 
-        curr.pre.next = curr.next;
-        curr.next.pre = curr.pre;
+        Node preTail = tail.pre;
+        preTail.next = node;
+        node.pre = preTail;
+        node.next = tail;
+        tail.pre = node;
 
-        moveToTail(curr);
+        return node.value;
 
-        return curr.value;
     }
 
     public void put(int key, int value) {
 
-        // normal case , less than capacity
-        // case , reach capacity
+        if (hashMap.containsKey(key)) {
+            Node node = hashMap.get(key);
+            node.value = value;
 
-        if (hashMap.size() == capacity) {
-            // delete head next node
-            Node t = head.next;
-            if (t != null) {
-                head.next = t.next;
-                t.next.pre = head;
-                hashMap.remove(t.key);
-            }
+            node.pre.next = node.next;
+            node.next.pre = node.pre;
+
+            Node preTail = tail.pre;
+            preTail.next = node;
+            node.pre = preTail;
+            node.next = tail;
+            tail.pre = node;
+
+            return;
         }
 
-        // new node, hashmap put this node
-        Node node = new Node(key,value);
+        // 到达容量限制 删除节点 更新指针head
+        if (hashMap.size() == capacity) {
+            Node t = head.next;
+            head.next = t.next;
+            t.next.pre = head;
+            hashMap.remove(t.key);
+        }
+
+        Node node = new Node(key, value);
+        // 插入到tail之前
+        Node preTail = tail.pre;
+        preTail.next = node;
+        node.pre = preTail;
+        node.next = tail;
+        tail.pre = node;
+
         hashMap.put(key, node);
 
-        moveToTail(node);
-
     }
 
-    private void moveToTail(Node node) {
-        // tail operation
-        if (tail.pre == null) {
-            tail.pre = node;
-            node.next = tail;
-        } else {
-            Node t = tail.pre;
-            t.next = node;
-            node.pre = t;
-            tail.pre = node;
-        }
-    }
 
 
 }
