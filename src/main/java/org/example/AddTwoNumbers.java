@@ -51,7 +51,7 @@ public class AddTwoNumbers {
             p = p.next;
         }
 
-        if (q != null) {
+        while (q != null) {
             ListNode node = new ListNode();
             node.val = (q.val + carry) % 10;
             node.next = null;
