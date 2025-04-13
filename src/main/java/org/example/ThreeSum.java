@@ -14,6 +14,9 @@ public class ThreeSum {
         Arrays.sort(nums);
 
         for (int i = 0; i < nums.length; i++) {
+            if (nums[i]>0) {
+                break;
+            }
             // 去重
             if (i != 0 && nums[i] == nums[i - 1]) {
                 continue;
@@ -31,6 +34,13 @@ public class ThreeSum {
                     list.add(nums[left]);
                     list.add(nums[right]);
                     result.add(list);
+
+                    // 去重
+                    while (left < right && nums[left] == nums[left+1]) left++;
+                    while (left < right && nums[right] == nums[right-1]) right--;
+
+                    left++;
+                    right--;
                 } else if (nums[left] + nums[right] < remain) {
                     left++;
                 } else {
