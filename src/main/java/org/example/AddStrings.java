@@ -14,7 +14,8 @@ public class AddStrings {
             int sum = (n1 + n2 + carry) % 10;
             carry = (n1 + n2 + carry) / 10;
 
-            result.insert(0, sum);
+//            result.insert(0, sum);
+            result.append(sum);
             p--;
             q--;
         }
@@ -24,7 +25,8 @@ public class AddStrings {
             int sum = (n1 + carry) % 10;
             carry = (n1  + carry) / 10;
             p--;
-            result.insert(0, sum);
+//            result.insert(0, sum);
+            result.append(sum);
         }
 
         while (q >= 0) {
@@ -32,10 +34,17 @@ public class AddStrings {
             int sum = (n2 + carry) % 10;
             carry = (n2  + carry) / 10;
             q--;
-            result.insert(0, sum);
+//            result.insert(0, sum);
+            result.append(sum);
         }
 
-        return result.toString();
+        if (carry > 0) {
+//            result.insert(0, '1');
+            result.append('1');
+        }
+
+
+        return result.reverse().toString();
 
     }
 }
